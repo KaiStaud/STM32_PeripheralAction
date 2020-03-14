@@ -5,8 +5,8 @@
 class DAC
 {
 private:
-	SPI_HandleTypeDef SPI;
-	GPIO_TypeDef CS_Port;
+	SPI_HandleTypeDef* SPI;
+	GPIO_TypeDef* CS_Port;
 	uint16_t CS_Pin;
 	uint16_t output_register[2];
 	bool buffer_state;
@@ -17,7 +17,8 @@ protected:
 
 public:
 	DAC();
-	DAC(SPI_HandleTypeDef SPIx, GPIO_TypeDef CSn_Port, uint16_t CSn_Pin);
+	virtual ~DAC();
+	void init(SPI_HandleTypeDef* SPIx,GPIO_TypeDef* CSn_GPIO_Port,uint16_t CSn_Pin);//, GPIO_TypeDef* CSn_Port, uint16_t CSn_Pin);
 	void set_Channel_A(uint16_t output);
 	void set_Channel_B(uint16_t output);
 	void set_buffer(bool enable);
